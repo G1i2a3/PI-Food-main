@@ -1,7 +1,10 @@
 .App {
   text-align: center;
+  background-color: #61dafb;
+  height: 100vh;
+  /* margin: 0px !important; */
+  background-image: url('D:\Henry\PI\PI-Food-main\client\src\Media\fondo-hamburguesa.jpg');
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,14 +17,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  margin: 0px !important;
+  /* background-color: #282c34; */
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
