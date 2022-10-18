@@ -1,25 +1,30 @@
 import React, {useState} from 'react';
-import './receta.css'
+import './receta.css';
 
 // class Recipe extends React.Component {
   export function Recipe (props) {
 
     // const [recipes, setRecipes] = useState([])
 
-    
-
     props.props.diets.includes()
 
-    console.log(props)
     return (
-        <div className="recipe_detail">
-            <h1>{props.props.title}</h1>
-            <img src={props.props.image} alt=''/>
-            <h2>{props.props.diets.map(d => {
+        <div>
+          <p>
+            <br></br>
+            <h1 className='home-header'>{props.props.title}</h1>
+          </p>
+            <img className='foto1' src={props.props.image} alt=''/>
+          <p>
+            <h2 className='diet1'>{props.props.diets.map(d => {
+              // if (!d) {return "NO diets bitch"}
               if (props.props.diets[props.props.diets.length-1] === d){
-                return d[0].toUpperCase() + d.substring(1)+"."} 
+                return d[0].toUpperCase() + d.substring(1)+"."
+              } 
                 return d[0].toUpperCase() + d.substring(1) + ", "
-            })}</h2>
+              })}
+            </h2>
+          </p>
         </div>
     );
 }

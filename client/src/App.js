@@ -5,23 +5,27 @@ import {
   Link
 } from "react-router-dom";
 import Home from './containers/home/home';
+import crearReceta from './containers/crearReceta/crearReceta';
 
 //import { Link } from 'react-router-dom';
-
 
 function App() {
   // const redirect = () => {
   // }
+  // function NavBar(){
   return (
     <div className="App">
-      <h1 className='App-header'>Bienvenidos!</h1>
+      <br></br>
       <p>
       <Link to="/home" className='button1'>HOME</Link>
+      <Link to="/misRecetas" className='button1'>MIS RECETAS</Link>
+      <Link to="/crearReceta" className='button1'>CREAR RECETA</Link>
       </p>
+      <h1 className='App-header'>Bienvenidos!</h1>
     </div>
 
-  );
-}
+  );}
+// }
 
 export default App;
 
