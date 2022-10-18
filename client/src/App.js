@@ -13,10 +13,11 @@ function App() {
   // const redirect = () => {
   // }
   return (
-
     <div className="App">
       <h1 className='App-header'>Bienvenidos!</h1>
-      <Link to="/home">HOME</Link>
+      <p>
+      <Link to="/home" className='button1'>HOME</Link>
+      </p>
     </div>
 
   );
