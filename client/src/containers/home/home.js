@@ -6,10 +6,12 @@ import {Recipe} from "../../Components/receta";
 export default function Home() {
   
   const [recipes, setRecipes] = useState([])
-  const [select, setSelect] = useState(false)
+  const [selectOrderBy, setSelectOrderBy] = useState(false)
+  const [selectFilter, setSelectFilter] = useState(false)
   const [recetaBuscada, setRecetaBuscada] = useState('')
   const [foodFilters, setFoodFilters] = useState([]);
   const [recetaFiltrada, setRecetaFiltrada] = useState([]);
+  const [recetasOrdenadas, setRecetasOrdenadas] = useState([]);
 
   //const api_key = '450cc799185f47f58184c605cfd7c657'
   const api_key = 'b807e2dedfba4732af41443ebef1ca9d'
@@ -19,31 +21,31 @@ export default function Home() {
   //   return filterRecetas()
   // }, [foodFilters])
 
- 
+  
   const handleChange = (recetaInput) => {
     setRecetaBuscada(recetaInput)
-      // if (recipe.length > 2) 
+    // if (recipe.length > 2) 
+  }
+  
+  const sendSearch = async(e)=>{    
+    // e.preventDefault()
+    fetch( `https://api.spoonacular.com/recipes/complexSearch?query=${recetaBuscada}&apiKey=${api_key}&addRecipeInformation=true`)       
+    .then(response => response.json())
+    .then(r => {
+      setRecipes(r.results)
+      setRecetaFiltrada(r.results)
+    })
+    .catch (err => alert(err, recetaBuscada))
+  }
+  
+    const handleCheck = (value, id) => {
+    let auxiliar = foodFilters
+    if (!value){
+      const index = foodFilters.indexOf(id);
+      auxiliar.splice(index, 1)
+      setFoodFilters(auxiliar)
     }
     
-    const sendSearch = async(e)=>{    
-      // e.preventDefault()
-      fetch( `https://api.spoonacular.com/recipes/complexSearch?query=${recetaBuscada}&apiKey=${api_key}&addRecipeInformation=true`)       
-        .then(response => response.json())
-        .then(r => {
-          setRecipes(r.results)
-          setRecetaFiltrada(r.results)
-        })
-        .catch (err => alert(err, recetaBuscada))
-    }
-
-
-const handleCheck = (value, id) => {
-  let auxiliar = foodFilters
-  if (!value){
-    const index = foodFilters.indexOf(id);
-    auxiliar.splice(index, 1)
-    setFoodFilters(auxiliar)
-  }
   else {
     //foodFilters.push(id);
     //setFoodFilters(auxiliar.push(id))
@@ -55,10 +57,29 @@ const handleCheck = (value, id) => {
   filterRecetas(auxiliar)
 } 
 
+    ////////////--------------------     a.sort((a, b) => a.healthScore-b.healthScore)
+
+const ordenarComida = (id) => {
+  let recetasOrdenadas = []
+  if (id === "a-z"){
+    recipes.sort((a,b) => a.title.localeCompare(b.title))
+  }
+  if (id === "z-a"){
+    recipes.sort((a,b) => b.title.localeCompare(a.title))
+  }
+  if (id === "hScorel-h"){
+    recipes.sort((a,b) => a.healthScore-b.healthScore)
+  }
+  if (id === "hScoreh-l"){
+    recipes.sort((a,b) => b.healthScore-a.healthScore)
+  }
+  setRecetasOrdenadas(recetasOrdenadas)
+}
+
 const filterRecetas = (fakeFilters) => {
   let auxiliarRecetas = []
   // console.log(recipes)
-  console.log("58", fakeFilters)                                       // chequiamos todos los food filters
+  // console.log("58", fakeFilters)                                       // chequiamos todos los food filters
   recipes.forEach((r) => {                                   //  chequiamos cada receta              
     let loTengoQueIncluir = true                      
       for (let i=0; i<fakeFilters.length; i++){               // en cada una, veo si tiene "diets"
@@ -76,26 +97,23 @@ const filterRecetas = (fakeFilters) => {
   return console.log(auxiliarRecetas)                 
 }
 
-// if (props.props.diets.includes(foodFilters)){
-
 // }
 
   return (
     <div className="search_recipe">
       <br></br>
-      <h1 className='recipe'>Recetas</h1>        
+      <h1 className='home-header'>Recipes</h1>        
         <div>
+          <div>     
         <br></br>
           {/* <input onChange={(e) => handleChange(e.target.value)} type='text' placeholder="Busca recetas aca..." /> */}
           <input type='text' placeholder="Busca recetas aca..." onChange={e => handleChange(e.target.value)}/>
-          <button onClick={(e)=>sendSearch(e)} className='button2'>Buscar</button>
-        </div>
-        <br></br>
-        <button onClick={() => setSelect(!select)} className='button2'>Filtrar</button>        
+          <button onClick={(e)=>sendSearch(e)} className='button2'>Search</button>
+          <button onClick={() => setSelectFilter(!selectFilter)} className='button3'>Filter</button>        
         {
-        select &&
-        <div>
-        <ul name="select" >
+        selectFilter &&
+        <div className='checked_box' >
+        <ul name="selectFilter" >
           <input type="checkbox" onChange={(e) => handleCheck(e.target.checked, "gluten free")}/>Gluten Free
           <br></br>
           <input type="checkbox" onChange={(e) => handleCheck(e.target.checked, "ketogenic")}/>Ketogenic
@@ -120,13 +138,35 @@ const filterRecetas = (fakeFilters) => {
         </ul> 
         </div>
         }
-
-      {recetaFiltrada.length > 0 ? 
+        <button onClick={() => setSelectOrderBy(!selectOrderBy)} className='button3'>Order by</button>               
+        </div>
+        {
+        selectOrderBy &&
+        <div className='checked_box' >
+        <ul name="select" >
+          <input type="checkbox" id='a-z' onClick={(e) => ordenarComida('a-z')}/>Alphabetically A - Z
+          <br></br>
+          <input type="checkbox" id='z-a' onClick={(e) => ordenarComida('z-a')}/>Alphabetically Z - A
+          <br></br>
+          <input type="checkbox" id='hScorel-h' onClick={(e) => ordenarComida('hScorel-h')}/>Health Score: Low to High
+          <br></br>
+          <input type="checkbox" id='hScoreh-l' onClick={(e) => ordenarComida('hScoreh-l')}/>Health Score: High to Low
+          <br></br>
+        </ul> 
+        </div>
+        }
+        </div>
+        <br></br>
+        
+      {/* {foodFilters.length > 0 && recetaFiltrada.length < 0}
+      {"No hay recetas que coincidan con tu busqueda."}
+       */}
+      {recetaFiltrada.length > 0 && 
       recetaFiltrada.map(r => {
         return <Recipe props={r}></Recipe>
-      }) :
-      "No hay recetas que coincidan con tu busqueda."
-    } 
+      })} 
+
       </div>
+      // "No hay recetas que coincidan con tu busqueda."
   )
 };

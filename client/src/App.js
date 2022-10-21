@@ -18,8 +18,8 @@ function App() {
       <br></br>
       <p>
       <Link to="/home" className='button1'>HOME</Link>
-      <Link to="/misRecetas" className='button1'>MIS RECETAS</Link>
-      <Link to="/crearReceta" className='button1'>CREAR RECETA</Link>
+      <Link to="/misRecetas" className='button1'>MY RECIPES</Link>
+      <Link to="/crearReceta" className='button1'>CREATE RECIPE</Link>
       </p>
       <h1 className='App-header'>Bienvenidos!</h1>
     </div>

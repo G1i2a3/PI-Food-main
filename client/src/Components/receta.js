@@ -12,7 +12,7 @@ import './receta.css';
         <div>
           <p>
             <br></br>
-            <h1 className='home-header'>{props.props.title}</h1>
+            <h1 className='titulo_receta'>{props.props.title}</h1>
           </p>
             <img className='foto1' src={props.props.image} alt=''/>
           <p>

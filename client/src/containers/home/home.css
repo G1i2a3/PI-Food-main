@@ -39,8 +39,7 @@ input {
   font-size: 25px;
 }
 
-.button2 {
-  margin-left: 10px;
+.button2 {  
   background-color: white;
   color: black;
   border: solid black 3px; 
@@ -56,4 +55,30 @@ input {
 box-shadow: 0px 0px 0px 0px;
 top: 4px;
 left: 4px;
+}
+
+.button3 {
+  margin-left: 30px;
+  background-color: white;
+  color: black;
+  border: solid black 3px; 
+  padding: 6px 17px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Futura;
+  font-size: 13px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px;
+}
+.button1:active {
+box-shadow: 0px 0px 0px 0px;
+top: 4px;
+left: 4px;
+}
+
+.checked_box {
+  color: black;
+  font-family: Futura light;
+  font-size: 17px;
+  accent-color: black;  
 }
