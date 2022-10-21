@@ -82,3 +82,17 @@ left: 4px;
   font-size: 17px;
   accent-color: black;  
 }
+
+.pie_pagina {  
+  margin-left: 30px;
+  background-color: white;
+  color: black;
+  border: solid black 3px; 
+  padding: 4px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Futura;
+  font-size: 9px;
+}
+

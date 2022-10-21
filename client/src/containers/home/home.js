@@ -104,7 +104,6 @@ const filterRecetas = (fakeFilters) => {
       <br></br>
       <h1 className='home-header'>Recipes</h1>        
         <div>
-          <div>     
         <br></br>
           {/* <input onChange={(e) => handleChange(e.target.value)} type='text' placeholder="Busca recetas aca..." /> */}
           <input type='text' placeholder="Busca recetas aca..." onChange={e => handleChange(e.target.value)}/>
@@ -155,7 +154,6 @@ const filterRecetas = (fakeFilters) => {
         </ul> 
         </div>
         }
-        </div>
         <br></br>
         
       {/* {foodFilters.length > 0 && recetaFiltrada.length < 0}
