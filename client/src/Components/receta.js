@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
         <div>
           <p>
             <br></br>
-            <Link to= '/`${props.props.title}`'>
+            <Link to= {`/${props.props.title}`}>
             <h1 className='titulo_receta'>{props.props.title}</h1>
             </Link>
           </p>
