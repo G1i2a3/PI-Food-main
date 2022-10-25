@@ -9,8 +9,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Home from "./containers/home/home"
-import CrearReceta from './containers/crearReceta/crearReceta';
+import CrearReceta from './containers/CrearReceta/crearReceta';
 import MisRecetas from './containers/misRecetas/misRecetas';
+import DetalleReceta from './containers/detalleReceta/detalleReceta';
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/misRecetas",
     element: <MisRecetas/>
+  },
+  {
+    path: "/:id",
+    element: <DetalleReceta/>
   }
   
 ]);

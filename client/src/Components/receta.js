@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './receta.css';
+import { Link } from 'react-router-dom';
 
 // class Recipe extends React.Component {
   export function Recipe (props) {
@@ -12,7 +13,9 @@ import './receta.css';
         <div>
           <p>
             <br></br>
+            <Link to= '/`${props.props.title}`'>
             <h1 className='titulo_receta'>{props.props.title}</h1>
+            </Link>
           </p>
             <img className='foto1' src={props.props.image} alt=''/>
           <p>
