@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import './home.css';
-import {Recipe} from "../../Components/receta";
+import Recipe from "../../Components/receta";
+import { addRecipeDetail } from '../../Redux/actions/index'
+import { connect } from "react-redux";
 
 
-export default function Home() {
+function Home(props) {
   
   const [recipes, setRecipes] = useState([])
   const [selectOrderBy, setSelectOrderBy] = useState(false)
@@ -21,7 +23,6 @@ export default function Home() {
   //   return filterRecetas()
   // }, [foodFilters])
 
-  
   const handleChange = (recetaInput) => {
     setRecetaBuscada(recetaInput)
     // if (recipe.length > 2) 
@@ -102,7 +103,10 @@ const filterRecetas = (fakeFilters) => {
   return (
     <div className="search_recipe">
       <br></br>
-      <h1 className='home-header'>Recipes</h1>        
+      <h1 className='home-header' onClick={() => {
+        props.addRecipeDetail({detalle: "dettallazzo"})
+        console.log("store", props.recipeDetail )
+        }}>Recipes</h1>        
         <div>
         <br></br>
           {/* <input onChange={(e) => handleChange(e.target.value)} type='text' placeholder="Busca recetas aca..." /> */}
@@ -168,3 +172,17 @@ const filterRecetas = (fakeFilters) => {
       // "No hay recetas que coincidan con tu busqueda."
   )
 };
+
+function mapStateToProps(state){
+  return {
+    recipeDetail: state.recipeDetail
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    addRecipeDetail: title => dispatch(addRecipeDetail(title))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

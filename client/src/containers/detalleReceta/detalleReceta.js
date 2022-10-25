@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import './detalleReceta.css';
 import { connect } from 'react-redux';
-import { geRecipeDetail } from '../../actions/index';
+import { addRecipeDetail } from '../../Redux/actions/index'
 
 
-  export default function RecipeDetail () {
+  function DetalleReceta (props) {
     // props.props.includes()
 
     return (
         <div>
           <p>
+            {/* // flecha button link to Home  */}
             <br></br>
-            <h1 className='titulo_receta'>Titulo</h1>
+            <h1 className='titulo_receta'>{props.recipeDetail.title}</h1>
           </p>
             {/* <img className='foto1' src={props.props.image} alt=''/> */}
           <p>
@@ -26,3 +27,19 @@ import { geRecipeDetail } from '../../actions/index';
         </div>
     );
 }
+
+// configuracion redux para leer store (las 3 funciones)
+
+function mapStateToProps(state){
+  return {
+    recipeDetail: state.recipeDetail
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    addRecipeDetail: title => dispatch(addRecipeDetail(title))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetalleReceta);

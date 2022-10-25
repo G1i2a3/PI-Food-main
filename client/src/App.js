@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
-import Home from './containers/home/home';
+// import Home from './containers/home/home';
 // import crearReceta from './containers/crearReceta/crearReceta';
 
 //import { Link } from 'react-router-dom';

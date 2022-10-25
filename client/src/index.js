@@ -12,6 +12,8 @@ import Home from "./containers/home/home"
 import CrearReceta from './containers/CrearReceta/crearReceta';
 import MisRecetas from './containers/misRecetas/misRecetas';
 import DetalleReceta from './containers/detalleReceta/detalleReceta';
+import { Provider } from 'react-redux';
+import store from "./Redux/store/index"
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -21,6 +23,7 @@ import DetalleReceta from './containers/detalleReceta/detalleReceta';
 //   </React.StrictMode>,
 //   document.getElementById('root')
 // ); //==> venia hecho
+
 const router = createBrowserRouter([
   {
     path: "/", 
@@ -28,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home/>
+    element: <Home />
   },
   {
     path: "/crearReceta",
@@ -45,10 +48,13 @@ const router = createBrowserRouter([
   
 ]);
 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <Provider store={ store }>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
