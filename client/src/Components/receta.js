@@ -14,14 +14,14 @@ import { addRecipeDetail } from '../Redux/actions/index'
 
     return (
         <div>
-          <p>
+          <div>
             <br></br>
             <Link to= {`/${props.props.title}`}>
             <h1 className='titulo_receta' onClick={() => props.addRecipeDetail(props.props)}>{props.props.title}</h1>
             </Link>
-          </p>
+          </div>
             <img className='foto1' src={props.props.image} alt=''/>
-          <p>
+          <div>
             <h2 className='diet1'>Diet type: {props.props.diets.map(d => {
               // if (!d) {return "NO diets bitch"}
               if (props.props.diets[props.props.diets.length-1] === d){
@@ -30,7 +30,7 @@ import { addRecipeDetail } from '../Redux/actions/index'
                 return d[0].toUpperCase() + d.substring(1) + ", "
               })}
             </h2>
-          </p>
+          </div>
         </div>
     );
 }

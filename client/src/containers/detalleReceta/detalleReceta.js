@@ -2,33 +2,36 @@ import React, {useState} from 'react';
 import './detalleReceta.css';
 import { connect } from 'react-redux';
 import { addRecipeDetail } from '../../Redux/actions/index';
+// import { NavBar } from '../NavBar/NavBar'
 
   function DetalleReceta (props) {
     // props.props.includes()
 
     return (
         <div>
-          <p>
-            {/* // flecha button link to Home  */}
-            <br></br>
+          {/* <NavBar /> */}
             <h1 className='titulo_receta'>{props.recipeDetail.title}</h1>
-          </p>
+          <br></br>
+          <br></br>
             <img className='foto1' src={props.recipeDetail.image} alt=''/>
           <p>
-            <h2 className='diet1'>Diet type: {props.recipeDetail.diets.map(d => {
+            <h2 className='mini_titulos'>Diet type:</h2> 
+            <p className='diet1'>{props.recipeDetail.diets.map(d => {
               if (props.recipeDetail.diets[props.recipeDetail.diets.length-1] === d){
                 return d[0].toUpperCase() + d.substring(1)+"."
               } 
                 return d[0].toUpperCase() + d.substring(1) + ", "
               })}
-            </h2> 
+            </p> 
           </p>
-          <h2 className='diet1'>health Score: {props.recipeDetail.healthScore}</h2>
+          <h2 className='mini_titulos'>health Score:</h2>
+          <p className='diet1'>{props.recipeDetail.healthScore}</p>
           <br></br>
-          
-          <h2 className='diet1'>Recipe summary: {props.recipeDetail.summary}</h2>
+          <h2 className='mini_titulos'>Recipe summary:</h2>
+          <p className='diet1'>{props.recipeDetail.summary}</p>
           <br></br>
-          <h2 className='diet1'>Step by step: </h2>
+          <h2 className='mini_titulos'>Step by step:</h2>
+          <p className='diet1'>Step by step: </p>
         </div>
     );
 }

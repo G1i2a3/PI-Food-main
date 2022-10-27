@@ -30,7 +30,7 @@ function Home(props) {
   }
 
   const irAAnteriorPagina = () => {
-    if (numeroDePagina - 1 === 0){
+    if (numeroDePagina - 1 < 0){
       throw alert ("You are on the first page")
     } else {
       setNumeroDePagina (numeroDePagina -1)
@@ -38,7 +38,7 @@ function Home(props) {
   }
 
   const irASiguientePagina = () => {
-    if (numeroDePagina + 1 > Math.ceil(recetaMostrada.length/9)){
+    if (numeroDePagina + 1 >= Math.ceil(recetaMostrada.length/9)){
       throw alert ("You are on the last page")
     } else {
       setNumeroDePagina (numeroDePagina +1)
