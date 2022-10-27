@@ -4,16 +4,17 @@ import Recipe from "../../Components/receta";
 import { addRecipeDetail } from '../../Redux/actions/index'
 import { connect } from "react-redux";
 
-
 function Home(props) {
   
   const [recipes, setRecipes] = useState([])
   const [selectOrderBy, setSelectOrderBy] = useState(false)
-  const [selectFilter, setSelectFilter] = useState(false)
-  const [recetaBuscada, setRecetaBuscada] = useState('')
+  const [recetaMostrada, setRecetaMostrada] = useState([]);
+  const [selectFilter, setSelectFilter] = useState(false);
+  const [recetaBuscada, setRecetaBuscada] = useState('');
   const [foodFilters, setFoodFilters] = useState([]);
-  const [recetaFiltrada, setRecetaFiltrada] = useState([]);
-  const [recetasOrdenadas, setRecetasOrdenadas] = useState([]);
+  const [numeroDePagina, setNumeroDePagina] = useState(0);
+  // const [recetaFiltrada, setRecetaFiltrada] = useState([]);
+  // const [recetasOrdenadas, setRecetasOrdenadas] = useState([]);
 
   //const api_key = '450cc799185f47f58184c605cfd7c657'
   const api_key = 'b807e2dedfba4732af41443ebef1ca9d'
@@ -27,6 +28,22 @@ function Home(props) {
     setRecetaBuscada(recetaInput)
     // if (recipe.length > 2) 
   }
+
+  const irAAnteriorPagina = () => {
+    if (numeroDePagina - 1 === 0){
+      throw alert ("You are on the first page")
+    } else {
+      setNumeroDePagina (numeroDePagina -1)
+    }
+  }
+
+  const irASiguientePagina = () => {
+    if (numeroDePagina + 1 > Math.ceil(recetaMostrada.length/9)){
+      throw alert ("You are on the last page")
+    } else {
+      setNumeroDePagina (numeroDePagina +1)
+    }
+  }
   
   const sendSearch = async(e)=>{    
     // e.preventDefault()
@@ -34,7 +51,8 @@ function Home(props) {
     .then(response => response.json())
     .then(r => {
       setRecipes(r.results)
-      setRecetaFiltrada(r.results)
+      setRecetaMostrada(r.results)
+      // console.log((numeroDePagina-1)*9, ((numeroDePagina-1)*9)+9)
     })
     .catch (err => alert(err, recetaBuscada))
   }
@@ -74,7 +92,7 @@ const ordenarComida = (id) => {
   if (id === "hScoreh-l"){
     recipes.sort((a,b) => b.healthScore-a.healthScore)
   }
-  setRecetasOrdenadas(recetasOrdenadas)
+  setRecetaMostrada(recetasOrdenadas)
 }
 
 const filterRecetas = (fakeFilters) => {
@@ -94,7 +112,7 @@ const filterRecetas = (fakeFilters) => {
       }
       if (loTengoQueIncluir) {auxiliarRecetas.push(r)}
   }) 
-  setRecetaFiltrada(auxiliarRecetas)                    // seteamos las recetas filtradas 
+  setRecetaMostrada(auxiliarRecetas)                    // seteamos las recetas filtradas 
   return console.log(auxiliarRecetas)                 
 }
 
@@ -110,7 +128,7 @@ const filterRecetas = (fakeFilters) => {
         <div>
         <br></br>
           {/* <input onChange={(e) => handleChange(e.target.value)} type='text' placeholder="Busca recetas aca..." /> */}
-          <input type='text' placeholder="Busca recetas aca..." onChange={e => handleChange(e.target.value)}/>
+          <input type='text' placeholder="Type recipe here..." onChange={e => handleChange(e.target.value)}/>
           <button onClick={(e)=>sendSearch(e)} className='button2'>Search</button>
           <button onClick={() => setSelectFilter(!selectFilter)} className='button3'>Filter</button>        
         {
@@ -159,19 +177,32 @@ const filterRecetas = (fakeFilters) => {
         </div>
         }
         <br></br>
-        
+       
       {/* {foodFilters.length > 0 && recetaFiltrada.length < 0}
       {"No hay recetas que coincidan con tu busqueda."}
        */}
-      {recetaFiltrada.length > 0 && 
+          
+      {/* {recetaFiltrada.length > 0 && 
       recetaFiltrada.map(r => {
         return <Recipe props={r}></Recipe>
+      })}  */}
+
+      {recetaMostrada.length > 0 && 
+      recetaMostrada.slice(numeroDePagina*9, (numeroDePagina+1)*9).map(r => {
+        return <Recipe props={r}></Recipe>
       })} 
+
+      <div>
+        <button className='button4' onClick={() => irAAnteriorPagina()}>back</button>
+        <button className='pie_pagina'>Page {numeroDePagina+1}</button>
+        <button className='button4' onClick={() => irASiguientePagina()}>next</button>
+      </div>
 
       </div>
       // "No hay recetas que coincidan con tu busqueda."
   )
 };
+
 
 function mapStateToProps(state){
   return {

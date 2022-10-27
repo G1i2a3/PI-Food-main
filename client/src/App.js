@@ -18,10 +18,11 @@ function App() {
       <br></br>
       <p>
       <Link to="/home" className='button1'>HOME</Link>
-      <Link to="/misRecetas" className='button1'>MY RECIPES</Link>
-      <Link to="/crearReceta" className='button1'>CREATE RECIPE</Link>
+      <Link to="/myRecipes" className='button1'>MY RECIPES</Link>
+      <Link to="/createRecipe" className='button1'>CREATE RECIPE</Link>
+      <Link to="/favoriteRecipes" className='button1'>FAVORITE RECIPES</Link>
       </p>
-      <h1 className='App-header'>Bienvenidos!</h1>
+      <h1 className='App-header'>WELCOME!</h1>
     </div>
 
   );}

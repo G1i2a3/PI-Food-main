@@ -12,6 +12,7 @@ import Home from "./containers/home/home"
 import CrearReceta from './containers/CrearReceta/crearReceta';
 import MisRecetas from './containers/misRecetas/misRecetas';
 import DetalleReceta from './containers/detalleReceta/detalleReceta';
+import FavoriteRecipes from './containers/favoriteRecipes/favoriteRecipes';
 import { Provider } from 'react-redux';
 import store from "./Redux/store/index"
 
@@ -34,12 +35,16 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/crearReceta",
+    path: "/createRecipe",
     element: <CrearReceta/>
   },
   {
-    path: "/misRecetas",
+    path: "/myRecipes",
     element: <MisRecetas/>
+  },
+  {
+    path: "/favoriteRecipes",
+    element: <FavoriteRecipes/>
   },
   {
     path: "/:id",
