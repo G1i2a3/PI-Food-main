@@ -1,8 +1,10 @@
-.body{
-  margin: 0px !important;
+.cuerpo{
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
 .titulo_receta {  
+  display: flex;
   margin: 0px !important;
   display: flex;
   flex-direction: column;
@@ -33,25 +35,34 @@
   text-align: center;
   display: inline-block;
   font-family: Futura;
-  font-size: 15px;
+  font-size: 13px;
 }
 
-.foto1 {
+.foto2 {
   border: solid black 3px; 
-  height: 200px;
+  height: 300px;
 }
 
-.diet1 {
-  margin: 0px !important;
-  padding-left: 10px;
-  margin-bottom: 5px;
+.summary_div{
   display: flex;
-  text-align: center;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
+  /* margin: 0px !important; */
+  margin-bottom: 10px;
+  margin-right: 10px;
+  align-items: left !important;
+  justify-content: left;
+  color: black;
+  background-color: white;
+  border: solid black 3px; 
+  padding: 0px 8px;
   text-decoration: none;
-  display: inline-block;
+  text-align: left;
+  display: inline-block; 
+  font-family: Futura light;
+  font-size: 16px;
+  max-width: 850px;
+}
+
+.step_size{
+  font-size: 13px;
   font-family: Futura;
-  font-size: 15px;
 }

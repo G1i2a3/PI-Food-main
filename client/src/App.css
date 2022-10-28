@@ -1,13 +1,15 @@
-
 .App {
-  text-align: center;
+  /* text-align: center; */
   /* background-color: #61dafb; */
-  height: 100vh;
+  /* height: 100vh; */
   /* padding-top: 25px; */
   /* margin: 0px !important; */
-  background-image: url('D:\Henry\PI\PI-Food-main\client\src\Media\fondo-hamburguesa.jpg');
+  background-position: center;
+  background-size: cover;
   background-attachment: fixed;
-}
+  background-image: url('D:\Henry\PI\PI-Food-main\client\src\Media\fondo-hamburguesa.jpg');
+  object-fit: cover;
+  }
 
 .button1 {
     margin-left: 30px;
