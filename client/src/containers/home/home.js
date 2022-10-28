@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './home.css';
 import Recipe from "../../Components/receta";
-import { addRecipeDetail } from '../../Redux/actions/index'
+import { addRecipeDetail} from '../../Redux/actions/index'
 import { connect } from "react-redux";
 import NavBar from '../NavBar/NavBar';
 

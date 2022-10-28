@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './receta.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addRecipeDetail } from '../Redux/actions/index'
+import { addRecipeDetail, getRecipes, addRecipeFavorite } from '../Redux/actions/index';
 
 
 // class Recipe extends React.Component {
@@ -19,6 +19,7 @@ import { addRecipeDetail } from '../Redux/actions/index'
             <Link to= {`/${props.props.title}`}>
             <h1 className='titulo_receta' onClick={() => props.addRecipeDetail(props.props)}>{props.props.title}</h1>
             </Link>
+            <button className='fav' onClick={()=> props.addRecipeFavorite(props.props)}>★</button>
           </p>
             <img className='foto1' src={props.props.image} alt=''/>
           <p>
@@ -48,7 +49,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    addRecipeDetail: recetaEntera => dispatch(addRecipeDetail(recetaEntera))
+    addRecipeDetail: recetaEntera => dispatch(addRecipeDetail(recetaEntera)),
+    addRecipeFavorite: recetaEntera => dispatch(addRecipeFavorite(recetaEntera))
   };
 }
 

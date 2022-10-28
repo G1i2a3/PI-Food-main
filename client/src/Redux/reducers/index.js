@@ -1,7 +1,8 @@
 const initialState = {
     recipesLoaded: [],
     recipesFavorites: [],
-    recipeDetail: {title: 22},
+    recipeDetail: {},
+    recetaEnCreacion: {}
 };
 
 

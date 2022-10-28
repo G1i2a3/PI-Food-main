@@ -25,9 +25,16 @@ export function addRecipeDetail(payload){
   }
 }
 
+export function addRecipeFavorite(recetaEntera){
+  return {
+      type: 'ADD_RECIPE_FAVORITE',
+      payload: recetaEntera
+  }
+}
+
 export function removeMovieFavorite(id){
   return {
-      type: 'REMOVE_MOVIE_FAVORITE',
+      type: 'REMOVE_RECIPE_FAVORITE',
       payload: id
   }
 }

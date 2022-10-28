@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './detalleReceta.css';
 import { connect } from 'react-redux';
 import { addRecipeDetail } from '../../Redux/actions/index';
-// import { NavBar } from '../NavBar/NavBar'
+import NavBar from '../NavBar/NavBar';
 
 
 function DetalleReceta (props) {
@@ -25,7 +25,7 @@ function DetalleReceta (props) {
 
     return (
         <div className='cuerpo'>
-          {/* <NavBar /> */}
+          <NavBar/>
             <h1 className='titulo_receta'>{props.recipeDetail.title}</h1>
           <br></br>
           <br></br>
