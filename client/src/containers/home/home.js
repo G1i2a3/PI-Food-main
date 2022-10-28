@@ -3,6 +3,8 @@ import './home.css';
 import Recipe from "../../Components/receta";
 import { addRecipeDetail } from '../../Redux/actions/index'
 import { connect } from "react-redux";
+import NavBar from '../NavBar/NavBar';
+
 
 function Home(props) {
   
@@ -120,6 +122,7 @@ const filterRecetas = (fakeFilters) => {
 
   return (
     <div className="search_recipe">
+      <NavBar/>
       <br></br>
       <h1 className='home-header' onClick={() => {
         props.addRecipeDetail({detalle: "dettallazzo"})

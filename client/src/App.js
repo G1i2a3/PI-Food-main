@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
+import NavBar from './containers/NavBar/NavBar';
 // import Home from './containers/home/home';
 // import crearReceta from './containers/crearReceta/crearReceta';
 
@@ -14,16 +15,19 @@ function App() {
   // }
   // function NavBar(){
   return (
-    <div className="App">
-      <br></br>
-      <p>
-      <Link to="/home" className='button1'>HOME</Link>
-      <Link to="/myRecipes" className='button1'>MY RECIPES</Link>
-      <Link to="/createRecipe" className='button1'>CREATE RECIPE</Link>
-      <Link to="/favoriteRecipes" className='button1'>FAVORITE RECIPES</Link>
-      </p>
-      <h1 className='App-header'>WELCOME!</h1>
-    </div>
+    <React.Fragment>
+      <div className="App">
+      <NavBar/>
+        <br></br>
+        {/* <p>
+        <Link to="/home" className='button1'>HOME</Link>
+        <Link to="/myRecipes" className='button1'>MY RECIPES</Link>
+        <Link to="/createRecipe" className='button1'>CREATE RECIPE</Link>
+        <Link to="/favoriteRecipes" className='button1'>FAVORITE RECIPES</Link>
+        </p> */}
+        <h1 className='App-header'>WELCOME!</h1>
+      </div>
+    </React.Fragment>
 
   );}
 // }

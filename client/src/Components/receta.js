@@ -22,7 +22,7 @@ import { addRecipeDetail } from '../Redux/actions/index'
           </p>
             <img className='foto1' src={props.props.image} alt=''/>
           <p>
-            {props.props.diets.length > 0 && <div> 
+            {props.props.diets.length > 0 && <div className='diet_type_div'> 
             <h2 className='diet_type'>Diet type: </h2>
             <p className='diet1'>{props.props.diets.map(d => {
               // if (!d) {return "NO diets bitch"}
