@@ -6,9 +6,10 @@ import './misRecetas.css'
 export default function crearReceta() {
 
   return (
-    <div>
+    <div className='my_recipes'>
       <NavBar/>
-    <h1>MIRA ACA TUS RECETAS!</h1>
+      <br></br>
+    <h1 className='title_my_recetas'>Your created recipes</h1>
     </div>
   )
 

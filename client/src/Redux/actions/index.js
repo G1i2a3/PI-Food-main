@@ -38,3 +38,10 @@ export function removeMovieFavorite(id){
       payload: id
   }
 }
+
+export function createOwnRecipe(recetaCreadaEntera){
+  return {
+      type: 'GET_RECIPE_DETAIL',
+      payload: recetaCreadaEntera
+  }
+}
