@@ -1,3 +1,4 @@
+// import { put } from "../../../../api/src/routes";
 
 export function getMovies(title){
   return function(dispatch){
@@ -17,6 +18,40 @@ export function getMovieDetail(imbdID){
       })        
   }
 }
+
+export const addRecipeFavorites = async(recetaEntera) => {
+  try {
+    const recetaAMandar = {
+      title: recetaEntera.title, 
+      healthScore: recetaEntera.healthScore,
+      readyInMinutes: recetaEntera.readyInMinutes,
+      servings: recetaEntera.servings,
+      weightWatcherSmartPoints: recetaEntera.weightWatcherSmartPoints,
+      summary: JSON.stringify(recetaEntera.summary),
+      steps: recetaEntera.steps,
+      diets: recetaEntera.diets
+    }
+        
+    console.log(recetaEntera)
+    const data = await fetch('http://localhost:3001/addToFavorites', {
+    method: 'PUT',
+    mode: 'cors',
+    referrerPolicy: 'no-referrer',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(recetaEntera),
+    
+  })
+  console.log(data)
+} 
+  catch (err) {
+    console.log('ERROR: ', err)
+  }
+}
+
+// if (res.status === 200)
+
 
 export function addRecipeDetail(payload){
   return {

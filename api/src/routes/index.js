@@ -8,8 +8,11 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+/// PARA GUARDAR LAS FAV EN LA BD PUDO HACER UN CREATE CON ESOS DATOS !!!!!!!!!!!!!!!!
+
+
 router.get('/recipes', function (req, res, next) { //    /recipes?name:"..."
-  const {name} = req.query 
+  const {title} = req.query 
   console.log(req.query);
   // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
   // Si no existe ninguna receta mostrar un mensaje adecuado (hacer try{} catch{})
@@ -45,17 +48,17 @@ router.get('/recipes/:idReceta', async function (req, res, next) {
 
 })
 
-router.post('/recipes', async function (req, res, next)  {
+router.post('/createRecipe', async function (req, res, next)  {
   try {
 
-    const {name, resumen, diet} = req.query 
+    const {title, summary, diet} = req.query 
     //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
     //   - Crea una receta en la base de datos relacionada con sus tipos de dietas.
 
     
     const recetaNuevaEnbd = await Recipe.create(
-      { name, 
-        resumen,
+      { title, 
+        summary,
         diets: [
           {name: diet}
         ]
@@ -87,16 +90,57 @@ router.get('/diets', async function (req, res, next) {
 router.post('/diets', async function (req, res, next)  {
   try {
 
-    const {name} = req.query 
+    const {title} = req.query 
     //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
     //   - Crea una receta en la base de datos relacionada con sus tipos de dietas.
 
     
-    const dietaNueva = await Diet.create( { name } );
+    const dietaNueva = await Diet.create( { title } );
 
     console.log("await res: ", dietaNueva)
 
     res.send("Dieta creada exitosamente!");
+  } catch (err) {
+    console.log("ERROR: ", err)
+    res.status(500).send(err.toString())
+  }
+})
+
+router.put('/addToFavorites', async function (req, res, next)  {
+  try {
+
+    //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
+    //   - Crea una receta en la base de datos relacionada con sus tipos de dietas.
+    
+    const {id, title, image, healthScore, readyInMinutes, servings, weightWatcherSmartPoints, summary, steps, diet} = req.body
+   
+    // if(await Recipe.findByPk(req.body.id)){
+
+    // }
+
+    console.log(req.body)
+
+    const addToFavorites = await Recipe.create(
+      { title, 
+        image,
+        isFavorite: true,
+        healthScore,
+        readyInMinutes,
+        servings,
+        weightWatcherSmartPoints,
+        summary,
+        steps,
+        // diets: [
+        //   {name: diet}
+        // ]
+      },{
+        include: [ Diet ]
+      }
+      );
+
+    console.log("await res: ", addToFavorites)
+
+    res.send("Receta agregada exitosamente!");
   } catch (err) {
     console.log("ERROR: ", err)
     res.status(500).send(err.toString())

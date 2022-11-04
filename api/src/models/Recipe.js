@@ -4,12 +4,37 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    resumen: {
-      type: DataTypes.STRING
+    summary: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    isFavorite:{
+      type: DataTypes.BOOLEAN
+    },
+    image: {
+      type: DataTypes.BLOB
+    },
+    healthScore: {
+      type: DataTypes.INTEGER
+    },
+    readyInMinutes: {
+      type: DataTypes.INTEGER
+    },
+    servings: {
+      type: DataTypes.INTEGER
+    },
+    weightWatcherSmartPoints: {
+      type: DataTypes.INTEGER
+    },
+    steps: {
+      type: DataTypes.TEXT,
     }
+    // healthScore: {
+    //   type: DataTypes.NUMBER,
+    // }
   });
 };

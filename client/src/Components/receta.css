@@ -13,7 +13,9 @@
   display: inline-block;
   font-family: Futura;
   font-size: 15px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px;
 }
+
 
 .foto1 {
   border: solid black 3px; 
@@ -35,7 +37,7 @@
   font-size: 16px;
 }
 
-.diet_type{
+/* .diet_type{
   display: flex;
   flex-direction: column;
   align-items: center !important;
@@ -47,7 +49,7 @@
   font-family: Futura;
   font-size: 13px;
   margin-right: 10px;
-}
+} */
 
 .diet_type_div{
   display: flex;
@@ -81,4 +83,18 @@
   border: solid black 3px;
   color: black;
   /* background-image: url('D:\Henry\PI\PI-Food-main\client\src\Media\Capture.JPG'); */
+}
+
+.tipo_dieta{
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center;
+  padding: 0px 10px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-family: Futura;
+  font-size: 13px;
+  margin-right: 10px;
 }
