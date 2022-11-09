@@ -2,7 +2,7 @@ import React from 'react';
 import './favoriteRecipes.css';
 import NavBar from '../NavBar/NavBar';
 import { addRecipeDetail, getRecipes, addRecipeFavorite } from '../../Redux/actions/index';
-import Recipe from '../../Components/receta';
+import Recipe from '../../Components/Receta/receta';
 import { connect } from 'react-redux';
 
 

@@ -51,7 +51,8 @@ router.get('/recipes/:idReceta', async function (req, res, next) {
 router.post('/createRecipe', async function (req, res, next)  {
   try {
 
-    const {title, summary, diet} = req.query 
+    const {title, summary, diets, steps, healthScore, image} = req.body 
+
     //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
     //   - Crea una receta en la base de datos relacionada con sus tipos de dietas.
 
@@ -59,9 +60,12 @@ router.post('/createRecipe', async function (req, res, next)  {
     const recetaNuevaEnbd = await Recipe.create(
       { title, 
         summary,
-        diets: [
-          {name: diet}
-        ]
+        steps,
+        healthScore,
+        image,
+        // diets: [
+        //   {name: diet}
+        // ]
       },{
         include: [ Diet ]
       }
@@ -106,39 +110,56 @@ router.post('/diets', async function (req, res, next)  {
   }
 })
 
-router.put('/addToFavorites', async function (req, res, next)  {
+router.post('/addToFavorites', async function (req, res, next)  {
   try {
 
     //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
     //   - Crea una receta en la base de datos relacionada con sus tipos de dietas.
     
-    const {id, title, image, healthScore, readyInMinutes, servings, weightWatcherSmartPoints, summary, steps, diet} = req.body
-   
+    // SI la receta esta en nuestra BD cambiamos la propiedad IsFavprite a TRUE
+    // Si la receta es de la api, la guardamos (creamos) en nuestra BD + propiedad isFavorite: true
+    // y El ID va a ser ID + healthscore + ready in minutes
+    // para saber si la receta es de la BD o de la api buesco si la receta tiene la proviedad cheap
+    //  
+  const {id, title, image, healthScore, readyInMinutes, servings, weightWatcherSmartPoints, summary, steps, diet} = req.body
+
+    if (req.body.hasOwnProperty('cheap')) {
+      
+      const addToFavorites = await Recipe.create(
+        { title, 
+          image,
+          isFavorite: true,
+          healthScore,
+          readyInMinutes,
+          servings,
+          weightWatcherSmartPoints,
+          summary,
+          steps,
+          id: id.toString().concat(healthScore, readyInMinutes)
+          // diets: [
+          //   {name: diet}
+          // ]
+        },{
+          include: [ Diet ]
+        }
+        );
+
+    }
+    else {
+      const recetaBuscadaParaFavs = await Recipe.findByPk(id)
+      recetaBuscadaParaFavs.update({ isFavorite: true })
+    }
+    
+    
     // if(await Recipe.findByPk(req.body.id)){
+      
+      // }
+      
+      console.log(req.body)
+      
+    
 
-    // }
-
-    console.log(req.body)
-
-    const addToFavorites = await Recipe.create(
-      { title, 
-        image,
-        isFavorite: true,
-        healthScore,
-        readyInMinutes,
-        servings,
-        weightWatcherSmartPoints,
-        summary,
-        steps,
-        // diets: [
-        //   {name: diet}
-        // ]
-      },{
-        include: [ Diet ]
-      }
-      );
-
-    console.log("await res: ", addToFavorites)
+    // console.log("await res: ", addToFavorites)
 
     res.send("Receta agregada exitosamente!");
   } catch (err) {

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import './receta.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addRecipeDetail, getRecipes, addRecipeFavorite, addRecipeFavorites } from '../Redux/actions/index';
-
+import { addRecipeDetail, getRecipes, addRecipeFavorite } from '../../Redux/actions/index';
+import {addRecipeFavorites} from "./funcionality"
 
 // class Recipe extends React.Component {
   function Recipe (props) {

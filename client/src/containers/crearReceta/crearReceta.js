@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './crearReceta.css';
 import NavBar from '../NavBar/NavBar';
 import { connect } from "react-redux";
-import { createOwnRecipe } from '../../Redux/actions/index'
+import { createOwnRecipe } from '../../Redux/actions/index';
+import { createRecipeOnDB } from '../CrearReceta/functionality';
 
 // const specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
 
@@ -11,9 +12,9 @@ function CrearReceta(props) {
   const [dishName, setDishName] = useState('')
   const [dishResume, setDishResume] = useState('')
   const [healthScore, setHealthScore] = useState()
-  const [dietTypes, setDietTypes] = useState()
+  const [dietTypes, setDietTypes] = useState([])
   const [stepByStep, setStepByStep] = useState('')
-  const [dishImage, setDishImage] = useState()
+  const [dishImage, setDishImage] = useState("")
   
   const handleChangeDishName = (dishNameInput) => {
     var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -40,20 +41,30 @@ function CrearReceta(props) {
   }  
 
   const handleCheckDietTypes = (id) => {
-    let auxiliar = [dietTypes]
-    auxiliar.push(id)
-    setDietTypes (auxiliar)
+    const indexEnDiets = dietTypes.indexOf(id)
+
+    if (indexEnDiets > -1) {
+      let aux = dietTypes
+      aux.splice(indexEnDiets, 1)
+      setDietTypes(aux)
+    }
+
+    if(indexEnDiets === -1) setDietTypes ([...dietTypes, id]) 
   }
 
   const handleChangeImage = (dishImageInput) => {
     setDishImage(dishImageInput)
   } 
+
+  function addTextInput() {
+    <input className='input_receta' type='large text' placeholder="Type here the first step..." onChange={e => handleChangeStepByStep(e.target.value)}/>
+}
   
   return (  
     <div className='create_recipe'>
     <NavBar/>
     <br></br>
-    <h1 className='main-title'>Create your recipe here</h1>
+    <h1 className='main-title' onClick={()=>console.log(dietTypes)}>Create your recipe here</h1>
     <br></br>
     <br></br>
     <h3 className='input_title'>Dish name:</h3>
@@ -95,13 +106,13 @@ function CrearReceta(props) {
         }
     <br></br>
     <h3 className='input_title'>Step by step</h3>
-    <input className='input_receta' type='large stext' placeholder="Type here the step by step..." onChange={e => handleChangeStepByStep(e.target.value)}/>
+    <input className='input_receta' type='large text' placeholder="Type here all the steps separated by a coma" onChange={e => handleChangeStepByStep(e.target.value)}/>
     <br></br>
-    <h3 className='input_title'>Upload image here</h3>
-    <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg" onChange={e => handleChangeImage(e.target.value)}></input>
+    <h3 className='input_title'>Paste image link</h3>
+    <input type="text" id="image-input" onChange={e => handleChangeImage(e.target.value)}></input>
     <br></br>
     <br></br>
-    <button className='create_button'>Create recipe</button>   
+    <button className='create_button' onClick={e => createRecipeOnDB({dishName, dishResume, healthScore, dietTypes, stepByStep, dishImage})}>Create recipe</button>   
     </div>
   )
 
