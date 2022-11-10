@@ -1,9 +1,13 @@
-const { Router } = require('express');
+//import fetch from 'node-fetch';
+const e = require('express');
+const { Router, response } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { Recipe, Diet } = require('../db');
-
 const router = Router();
+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -17,7 +21,7 @@ router.get('/recipes', function (req, res, next) { //    /recipes?name:"..."
   // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
   // Si no existe ninguna receta mostrar un mensaje adecuado (hacer try{} catch{})
 
-  // Recipe.findAll()
+  // Recipe.findAll() where name contains or similar to ALGO 
   // const {data} = await axios.get("apiexternaderecetas")
   // cost response = [...data, ...lasotras]
 
@@ -168,6 +172,34 @@ router.post('/addToFavorites', async function (req, res, next)  {
   }
 })
 
+router.get('/searchedRecipe/:recetaBuscada', async function (req, res){
+  try {
+    const {recetaBuscada} = req.params
+    console.log('req.params', req.params)
+    console.log('req.query', req.query)
+    console.log('hola',recetaBuscada)
+    const searchedRecipe = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${req.params.recetaBuscada}&apiKey=${process.env.api_key}&addRecipeInformation=true`)       
+    const data = await searchedRecipe.json()
+    // traet las receta de la db y concatenar con data 
+    res.send(data)
+  console.log(data)
+  } catch (err){
+    res.send(err.toString())
+  }
+})
+
+
+// const sendSearch = async(e)=>{    
+//   // e.preventDefault()
+//   fetch( `https://api.spoonacular.com/recipes/complexSearch?query=${recetaBuscada}&apiKey=${api_key}&addRecipeInformation=true`)       
+//   .then(response => response.json())
+//   .then(r => {
+//     setRecipes(r.results)
+//     setRecetaMostrada(r.results)
+//     // console.log((numeroDePagina-1)*9, ((numeroDePagina-1)*9)+9)
+//   })
+//   .catch (err => alert(err, recetaBuscada))
+// }
 
 
 module.exports = router;

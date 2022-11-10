@@ -69,6 +69,7 @@ function DetalleReceta (props) {
           <br></br>
           <div className='summary_div'>
           <h2 className='step_size'>Step by step: </h2>
+          {/* if has own roperty cheap hacer asi como esta abajo, sino, si es de mi DB pongo directo el texto ya que no es HTML */}
           <p>{steps.map(s => <p className=''>{steps.indexOf(s)+1}- {s.step}</p>)}</p>
           </div>
         </div>

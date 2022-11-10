@@ -46,10 +46,10 @@ function Home(props) {
       setNumeroDePagina (numeroDePagina +1)
     }
   }
-  
+
   const sendSearch = async(e)=>{    
     // e.preventDefault()
-    fetch( `https://api.spoonacular.com/recipes/complexSearch?query=${recetaBuscada}&apiKey=${api_key}&addRecipeInformation=true`)       
+    fetch(`http://localhost:3001/searchedRecipe/${recetaBuscada}`)       
     .then(response => response.json())
     .then(r => {
       setRecipes(r.results)
@@ -58,6 +58,19 @@ function Home(props) {
     })
     .catch (err => alert(err, recetaBuscada))
   }
+  
+  
+  // const sendSearch = async(e)=>{    
+  //   // e.preventDefault()
+  //   fetch( `https://api.spoonacular.com/recipes/complexSearch?query=${recetaBuscada}&apiKey=${api_key}&addRecipeInformation=true`)       
+  //   .then(response => response.json())
+  //   .then(r => {
+  //     setRecipes(r.results)
+  //     setRecetaMostrada(r.results)
+  //     // console.log((numeroDePagina-1)*9, ((numeroDePagina-1)*9)+9)
+  //   })
+  //   .catch (err => alert(err, recetaBuscada))
+  // }
   
     const handleCheck = (value, id) => {
     let auxiliar = foodFilters
