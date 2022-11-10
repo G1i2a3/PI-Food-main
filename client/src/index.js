@@ -42,10 +42,10 @@ const router = createBrowserRouter([
     path: "/myRecipes",
     element: <MisRecetas/>
   },
-  {
-    path: "/favoriteRecipes",
-    element: <FavoriteRecipes/>
-  },
+  // {
+  //   path: "/favoriteRecipes",
+  //   element: <FavoriteRecipes/>
+  // },
   {
     path: "/:id",
     element: <DetalleReceta/>

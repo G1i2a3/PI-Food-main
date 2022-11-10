@@ -63,9 +63,9 @@ router.post('/createRecipe', async function (req, res, next)  {
         steps,
         healthScore,
         image,
-        // diets: [
-        //   {name: diet}
-        // ]
+        diets: [
+          {name: diet}
+        ]
       },{
         include: [ Diet ]
       }

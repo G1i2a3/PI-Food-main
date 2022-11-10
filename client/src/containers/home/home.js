@@ -78,23 +78,25 @@ function Home(props) {
   filterRecetas(auxiliar)
 } 
 
-    ////////////--------------------     a.sort((a, b) => a.healthScore-b.healthScore)
+const ordenarComida = (value) => {
+  console.log(value)
+  console.log('recetamostrada', recetaMostrada)
+  let recetasOrdenadas = recetaMostrada
+  if (value === "a-z"){
+    recetasOrdenadas.sort((a,b) => a.title.localeCompare(b.title))
+  }
+  if (value === "z-a"){
+    recetasOrdenadas.sort((a,b) => b.title.localeCompare(a.title))
+  }
+  if (value === "hScorel-h"){
+    recetasOrdenadas.sort((a,b) => a.healthScore-b.healthScore)
+  }
+  if (value === "hScoreh-l"){
+    recetasOrdenadas.sort((a,b) => b.healthScore-a.healthScore)
+  }
+  console.log('recetaordenada', recetasOrdenadas)
 
-const ordenarComida = (id) => {
-  let recetasOrdenadas = []
-  if (id === "a-z"){
-    recipes.sort((a,b) => a.title.localeCompare(b.title))
-  }
-  if (id === "z-a"){
-    recipes.sort((a,b) => b.title.localeCompare(a.title))
-  }
-  if (id === "hScorel-h"){
-    recipes.sort((a,b) => a.healthScore-b.healthScore)
-  }
-  if (id === "hScoreh-l"){
-    recipes.sort((a,b) => b.healthScore-a.healthScore)
-  }
-  setRecetaMostrada(recetasOrdenadas)
+  return setRecetaMostrada([...recetasOrdenadas])
 }
 
 const filterRecetas = (fakeFilters) => {
@@ -115,7 +117,6 @@ const filterRecetas = (fakeFilters) => {
       if (loTengoQueIncluir) {auxiliarRecetas.push(r)}
   }) 
   setRecetaMostrada(auxiliarRecetas)                    // seteamos las recetas filtradas 
-  return console.log(auxiliarRecetas)                 
 }
 
 // }
@@ -162,9 +163,18 @@ const filterRecetas = (fakeFilters) => {
         </ul> 
         </div>
         }
-        <button onClick={() => setSelectOrderBy(!selectOrderBy)} className='button3'>Order by</button>               
         </div>
-        {
+        {/* <label for="orderby">Order by</label> */}
+        <select id="list" defaultValue={'DEFAULT'} onChange={(e) => ordenarComida(e.target.value)}>
+          {/* <option selected disabled hidden>Order by</option> */}
+          <option value="DEFAULT" disabled>Order by</option>
+          <option value="a-z" >A - Z</option>
+          <option value="z-a" >Z - A</option>
+          <option value="hScorel-h" >Health Score: Low to High</option>
+          <option value="hScoreh-l" >Health Score: High to Low</option>
+        </select>
+
+        {/* {
         selectOrderBy &&
         <div className='checked_box' >
         <ul name="select" >
@@ -178,21 +188,21 @@ const filterRecetas = (fakeFilters) => {
           <br></br>
         </ul> 
         </div>
-        }
+        } */}
         <br></br>
        
       {/* {foodFilters.length > 0 && recetaFiltrada.length < 0}
-      {"No hay recetas que coincidan con tu busqueda."}
-       */}
-          
-      {/* {recetaFiltrada.length > 0 && 
+      {"No hay recetas que coincidan con tu busqueda."} */}
+       
+{/*           
+      {recetaFiltrada.length > 0 && 
       recetaFiltrada.map(r => {
         return <Recipe props={r}></Recipe>
-      })}  */}
+      })}   */}
 
       {recetaMostrada.length > 0 && 
       recetaMostrada.slice(numeroDePagina*9, (numeroDePagina+1)*9).map(r => {
-        return <Recipe props={r}></Recipe>
+        return <Recipe key={r.title} props={r}></Recipe>
       })} 
 
       <div>
